@@ -32,7 +32,7 @@ public class ControllerServlet extends HttpServlet {
             HttpSession session = request.getSession();
             Db db = Db.getInstance();
             AulaDto dto = db.findById(id);
-            session.setAttribute("dto", dto);
+            session.setAttribute("dto", dto); // Aqui você está adicionando o objeto à sessão com o nome "dto"
             RequestDispatcher rd = request.getRequestDispatcher("edit.jsp");
             rd.forward(request, response);
         }

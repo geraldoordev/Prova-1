@@ -17,8 +17,8 @@ public class AulaDto {
 
     public AulaDto(Aula aula, int codDisciplina) {
         this.id = Long.toString(aula.getId());
-        this.disciplina = geraNomeDisc(codDisciplina);
         this.codDisciplina = Integer.toString(codDisciplina);
+        this.disciplina = geraNomeDisc(codDisciplina);
         this.assunto = aula.getAssunto();
         this.duracao = Integer.toString(aula.getDuracao());
         this.data = formataData(aula.getData());
@@ -34,14 +34,14 @@ public class AulaDto {
         }
     }
 
-
     private String formataData(String dt) {
+        if (dt == null) return null;
         String[] partes = dt.split("-");
-        String resposta = partes[2] + "/" + partes[1] + "/" + partes[0];
-        return resposta;
+        return partes[2] + "/" + partes[1] + "/" + partes[0];
     }
 
     public void reverteFormatoData() {
+        if (this.data == null) return;
         String[] partes = this.data.split("/");
         this.data = partes[2] + "-" + partes[1] + "-" + partes[0];
     }
@@ -68,8 +68,9 @@ public class AulaDto {
         return codDisciplina;
     }
 
-    public void setCodDisciplina(String string) {
-        this.codDisciplina = string;
+    public void setCodDisciplina(String codDisciplina) {
+        this.codDisciplina = codDisciplina;
+        this.disciplina = geraNomeDisc(Integer.parseInt(codDisciplina)); // Atualiza o nome da disciplina
     }
 
     public String getAssunto() {
@@ -109,5 +110,4 @@ public class AulaDto {
         return "AulaDto [id=" + id + ", disciplina=" + disciplina + ", codDisciplina=" + codDisciplina + ", assunto="
                 + assunto + ", duracao=" + duracao + ", data=" + data + ", horario=" + horario + "]";
     }
-
 }
